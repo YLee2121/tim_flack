@@ -93,7 +93,9 @@ def sign_up():
             # insert into db 
             db.user.insert_one(u)
             flash('Account created!', category='success')
-            return "sign in succ"
+
+            return redirect(url_for('auth.log_in'))
+            
     return render_template("sign_up.html")
 
 
