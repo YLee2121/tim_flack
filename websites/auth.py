@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash, jsonify
+from flask import Blueprint, render_template, redirect, url_for, request, flash, jsonify, session
 from . import db
 from passlib.hash import pbkdf2_sha256
 
@@ -27,10 +27,13 @@ def log_in():
         
         # log in successful
         else:
-            return 'log in successful'
+            session['logged'] = True  
+            session['user_email'] = email   
+            return redirect(url_for('views.home'))
 
+    if "logged" in session:
+        return redirect(url_for('views.home'))
 
-        
 
     return render_template('log_in.html')
 
@@ -45,7 +48,11 @@ def log_in():
 
 @auth.route('/log_out')
 def log_out():
-    return render_template("log_out.html")
+    if "logged" in session:
+        session.clear()
+        return render_template("log_out.html")
+    
+    return redirect(url_for('auth.log_in'))
 
 
 
@@ -61,37 +68,35 @@ def sign_up():
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
 
+        # not bu mail
         if not email.endswith('@bu.edu'):
             flash('Email must end with @bu.edu', category='error')
+        
+        # already registered
         elif db.user.find_one({"email": email}):
             flash('Email in used', category='error')
+        
+        # confirm password invalid
         elif password1 != password2:
             flash('Password not the same', category='error')
+        
+        # sign up success
         else:
             # create user object
             u = {
                 "email":email, 
                 "password":password1
                 }
-
             # encrypt password
             u['password'] = pbkdf2_sha256.encrypt(u['password'])
 
             # insert into db 
             db.user.insert_one(u)
-
             flash('Account created!', category='success')
-
             return "sign in succ"
-
-
-
-
     return render_template("sign_up.html")
 
-@auth.route("/testdb")
-def testdb():
-    u = {"email":"emailjdaiojfoas", "password":"passweorjaioew"}
-    db.user.insert_one(u)
-    db.product.insert_one(u)
-    return "test"
+
+@auth.route('/reset_password')
+def reset_password():
+    return render_template('reset_password.html')
