@@ -23,11 +23,11 @@
 
   {% for p in all_product_owned %}
 
-    <div class="card" style="width: 18rem;">
+    <div class="card border-dark mb-3" style="max-width: 18rem;">
 
         <div class="card-body">
           <h3 class="card-title">{{p['title']}}</h3>
-          <h6 class="card-text">{{p['description']}}</h6>
+          <h6 class="card-text">{{ p['description'] }}</h6>
         </div>
 
         <ul class="list-group list-group-flush">
@@ -35,7 +35,6 @@
           <li class="list-group-item">Category: {{p['category']}}</li>
         </ul>
      
-
 
 
 

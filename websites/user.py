@@ -15,6 +15,7 @@ def profile():
 
     all_product_owned = db.product.find({"owner":session['user_email']})
     
+    
     return render_template('profile.html', email=session['user_email'], all_product_owned = all_product_owned)
 
 
@@ -50,6 +51,7 @@ def add_product():
 
         # redirect to profile
         flash('Product Add!', category='success')
+
         return redirect(url_for('user.profile'))
 
     return render_template('add_product.html')
