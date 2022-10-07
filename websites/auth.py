@@ -5,9 +5,6 @@ from passlib.hash import pbkdf2_sha256
 auth = Blueprint("auth", __name__)
 
 
-
-
-
 @auth.route('/log_in', methods=["POST", "GET"])
 def log_in():
 
@@ -40,13 +37,6 @@ def log_in():
 
 
 
-
-
-
-
-
-
-
 @auth.route('/log_out')
 def log_out():
     if "logged" in session:
@@ -54,11 +44,6 @@ def log_out():
         return render_template("log_out.html")
     
     return redirect(url_for('auth.log_in'))
-
-
-
-
-
 
 
 
@@ -103,5 +88,3 @@ def sign_up():
 @auth.route('/reset_password')
 def reset_password():
     return render_template('reset_password.html')
-
-

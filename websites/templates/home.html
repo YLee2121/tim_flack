@@ -2,7 +2,33 @@
 
 {% block title %}HOME{% endblock %}
 
+
+
 {% block body%}
-<h1>BU MarketPlace</h1>
-<h3>Welcome back {{email}}</h3>
+    <h1>BU MarketPlace</h1>
+    <p>Welcome back {{email}}</p>
+
+
+
+    {% for p in all_product_online %}
+
+        <div class="card border-dark mb-3" style="max-width: 18rem;">
+
+            <div class="card-body">
+                <h3 class="card-title">{{p['title']}}</h3>
+                <h6 class="card-text">{{p['description']}}</h6>
+            </div>
+
+            <ul class="list-group list-group-flush">
+                <p>Price: ${{p['price']}}</p>
+                <p>Category: {{p['category']}}</p>
+                <p>Seller: {{p['owner']}}</p>
+            </ul>
+        </div>
+   
+    {% endfor %}
+    
+
+
+
 {% endblock%}

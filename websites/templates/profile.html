@@ -3,6 +3,9 @@
 {% block title %}PROFILE{% endblock %}
 
 {% block body%}
+
+
+
 <div class="card w-75">
     <div class="card-body">
 
@@ -17,6 +20,7 @@
 
   <br>
   <br>
+
   {% for p in all_product_owned %}
 
     <div class="card" style="width: 18rem;">
@@ -30,8 +34,9 @@
           <li class="list-group-item">Price: ${{p['price']}}</li>
           <li class="list-group-item">Category: {{p['category']}}</li>
         </ul>
+     
 
-        <p>{{p._id}}</p>
+
 
 
     </div>
@@ -43,5 +48,8 @@
     <br>
     <br>
   {% endfor %}
+
+
+
 
 {% endblock%}
