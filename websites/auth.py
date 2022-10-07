@@ -29,6 +29,7 @@ def log_in():
         else:
             session['logged'] = True  
             session['user_email'] = email   
+            flash('Log in successfully', category='success')
             return redirect(url_for('views.home'))
 
     if "logged" in session:
@@ -102,3 +103,5 @@ def sign_up():
 @auth.route('/reset_password')
 def reset_password():
     return render_template('reset_password.html')
+
+
