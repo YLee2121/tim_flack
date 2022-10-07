@@ -41,7 +41,8 @@ def log_in():
 def log_out():
     if "logged" in session:
         session.clear()
-        return render_template("log_out.html")
+        flash('Log out successful', category='success')
+        return redirect(url_for('auth.log_in'))
     
     return redirect(url_for('auth.log_in'))
 
