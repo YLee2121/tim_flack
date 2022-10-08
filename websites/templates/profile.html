@@ -39,12 +39,12 @@
           <li class="list-group-item">Category: {{p['category']}}</li>
         </ul>
      
-
+        <a href="{{url_for('user.edit', product_id=p._id)}}" class="btn btn-success">Edit</a>
+        <a href="{{url_for('user.delete', product_id=p._id)}}" class="btn btn-danger btn">Delete</a>
 
 
     </div>
-    
-    <a href="{{url_for('user.delete', product_id=p._id)}}" class="btn btn-outline-danger btn">Delete</a>
+   
 
 
 
