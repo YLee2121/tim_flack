@@ -1,0 +1,41 @@
+
+<style>
+    #homepage {
+        background-image: url("static/pic_for_html/about_page_campus.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        height:600px;
+        margin:0;
+    }   
+
+</style>
+
+<style>
+    .button {
+      background-color: whitesmoke;
+      border: none;
+      color: black;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 30px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+</style>
+
+    <div class="jumbotron">
+        <div id="homepage" class="jumbotron"></div>
+        <h1 class="display-4" style = "position:absolute; left:520px; top:200px; color:white; font-size:600%;">About Us</h1>
+        <p class="lead" style = "position:absolute; left:30px; top:2px;font-size:200%;color:rgb(0, 0, 0);">
+            <a class="button" href="{{ url_for('views.home') }}" role="button">Home</a>
+        </p>      
+        <p class="lead" style = font-size:120%;>
+            This BU Market Web aims to build a platform for people related to BU to trade old or new items. The original intention of building this platform is to promote the recycling of used goods by BU faculty, staff and students, and also to relieve the pressure on the environment and the community caused by the massive throwing of furniture during graduation season.
+            Through this website, users can easily find all the good things that meet their needs in BU community.
+            It is safe to trade between students and teachers what you no longer need.
+            <h4>Enjoy it!</h4>
+            <h4>Go and find what you need!!!</h4>
+        </p>
+    </div>

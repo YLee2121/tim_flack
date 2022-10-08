@@ -17,6 +17,10 @@ def home():
     
     return render_template("home.html", email=session['user_email'], all_product_online=all_product)
 
+@views.route("/about")
+def about(): 
+    return render_template("about.html")
+
 
 
 
