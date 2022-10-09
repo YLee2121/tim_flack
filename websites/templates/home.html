@@ -11,6 +11,19 @@
   width: 300px;
   height: 300px;
 }
+
+.img_wrapper {
+    width: 300px;
+    height: 200px;
+}
+
+.item_pic {
+    width: 100%; /* or any custom size */
+    height: 100%; 
+    object-fit: cover;
+}
+
+
 </style>
 
 {% extends "home_base.html" %}
@@ -19,23 +32,22 @@
 
 
 {% block body%}
-    <h1 style="text-align: center;">BU MarketPlace</h1>
-    <p style="text-align: center;">Welcome back {{email}}</p>
+    <h4 style = "font-size:x-large; position: relative; left: 40px; top: 10px;">New Arrivals!</h4>
+    <h4 style = "font-size: medium; position: relative; left: 40px; top: 2px;">Find what you need</h4>
 
     <div class="wrapper">
 
     {% for p in all_product_online %}
 
-        <div class="card border-dark mb-3" style="max-width: 18rem;">
+        <div class="card border-white mb-3" style="max-width: 18rem;">
 
-            <div class="card-body">
-                <h3 class="card-title">{{p['title']}}</h3>
+            <div class="img_wrapper">
+                <img src="../static/pic_for_html/test_image.png" class="item_pic">
             </div>
-
             <ul class="list-group list-group-flush">
-                <p>Price: ${{p['price']}}</p>
-                <p>Category: {{p['category']}}</p>
-                <p>Seller: {{p['owner']}}</p>
+                <a style="text-align:center;">Title: ${{p['title']}}</a>
+                <a style="text-align:center;">Price: ${{p['price']}}</a>
+                <a style="text-align:center;">Seller: {{p['owner']}}</a>
             </ul>
         </div>
    
