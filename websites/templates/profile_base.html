@@ -32,8 +32,6 @@
 
       <img src="../static/pic_for_html/bu_log.png" width="200" height="100" alt="bu logo" style="margin-right: 1em;">
 
-      <h1 style="text-align: center; color:white">BU MarketPlace</h1>
-
       <button
         class="navbar-toggler"
         type="button"
@@ -42,31 +40,24 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
+
       
         <div class="collapse navbar-collapse" id="navbar">
             <div class="navbar-nav">
-        
-
-              <a class="nav-item nav-link" id="user" href="/profile" style="position: absolute; right: 700;top: 40px;">Profile</a>
-              <a class="nav-item nav-link" id="about" href="/about" style="position: absolute; right: 600;top: 40px;">About</a>
-              <a class="nav-item nav-link" id="log_out" href="/log_out" style="position: absolute; right: 500;top: 40px;">Logout</a>
-            
+                <a class="nav-item nav-link" id="home" href="/">Home</a>
+                <a class="nav-item nav-link" id="about" href="/about">About</a>
+                <a class="nav-item nav-link" id="log_out" href="/log_out">Logout</a>
+              
+               
             </div>
           </div>
-
-
-          <div class="search">
-            <input type="text" placeholder="Search..">
-          </div>
-
-
       </nav>
     
 
 
 
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
         {% for category, message in messages %}
 

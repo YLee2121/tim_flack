@@ -1,58 +1,84 @@
-{% extends "base.html" %}
+<style>
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .item_wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    text-align: center;
+    justify-items: center;
+  }
+  
+  .card {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .img_wrapper {
+      width: 200px;
+      height: 100px;
+  }
+  
+  .item_pic {
+      width: 100%; /* or any custom size */
+      height: 100%; 
+      object-fit: cover;
+  }
+
+  .info_text{
+    border: red;
+
+  }
+  
+  
+  </style>
+
+{% extends "profile_base.html" %}
 
 {% block title %}PROFILE{% endblock %}
 
 {% block body%}
 
+<div class="wrapper">
 
-
-<div class="card w-75">
-    <div class="card-body">
-
-
-      <h1 class="card-title">MyUser: {{email}}</h1>
-      <p class="card-text">This is your personal page</p>
-      <a href="/profile/add_product" class="btn btn-primary">Add New Product</a>
-
-
-    </div>
+  <div class="info w-15">
+    <h1 class="info_text" style = font-size:100%; >Dashboard</h1>
+    <h1 class="info_text" style = font-size:100%; >{{email}}</h1>
+    <a href="/profile/add_product" class="btn btn-primary">Add New Product</a>
+    <br>
+    <br>
   </div>
 
-  <br>
-  <br>
+    <div class="item_wrapper">
 
+      {% for p in all_product_owned %}
 
-  {% for p in all_product_owned %}
+      <div class="card border-dark mb-3" style="max-width: 18rem;">
 
-    <div class="card border-dark mb-3" style="max-width: 18rem;">
-
-        <div class="card-body">
-          <h3 class="card-title">{{p['title']}}</h3>
-          <p>{{ p['description'] }}</p>
-
+          <div class="img_wrapper">
+            <img src="../static/pic_for_html/test_image.png" class="item_pic">
         </div>
 
+          <div class="card-body">
+            <h3 class="card-title">{{p['title']}}</h3>
+            <p>{{ p['description'] }}</p>
 
-
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Price: ${{p['price']}}</li>
-          <li class="list-group-item">Category: {{p['category']}}</li>
-        </ul>
-     
-        <a href="{{url_for('user.edit', product_id=p._id)}}" class="btn btn-success">Edit</a>
-        <a href="{{url_for('user.delete', product_id=p._id)}}" class="btn btn-danger btn">Delete</a>
-
-
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Price: ${{p['price']}}</li>
+            <li class="list-group-item">Category: {{p['category']}}</li>
+          </ul>
+      
+          <a href="{{url_for('user.edit', product_id=p._id)}}" class="btn btn-success">Edit</a>
+          <a href="{{url_for('user.delete', product_id=p._id)}}" class="btn btn-danger btn">Delete</a>
+      </div>
+    {% endfor %}
     </div>
-   
 
 
-
-    <br>
-    <br>
-  {% endfor %}
-
-
-
+</div>
 
 {% endblock%}
