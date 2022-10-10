@@ -4,6 +4,8 @@ from flask import Blueprint, render_template, redirect, url_for, session, reques
 from . import db
 import json
 from bson.objectid import ObjectId
+from datetime import datetime
+
 
 user = Blueprint("user", __name__)
 
@@ -36,6 +38,8 @@ def add_product():
         price = request.form.get('product_price')
         description = request.form.get('product_description')
         owner = session['user_email']
+        post_date = datetime.today()
+
 
         # define a product 
         p = {
@@ -43,7 +47,8 @@ def add_product():
             "title":title, 
             "category":category, 
             "price":price, 
-            "description":description
+            "description":description,
+            "post_date": post_date
         }
 
         # update db
@@ -55,6 +60,9 @@ def add_product():
         return redirect(url_for('user.profile'))
 
     return render_template('add_product.html')
+
+
+
 
 @user.route('/profile/edit/<product_id>', methods=['POST', 'GET'])
 def edit(product_id):
@@ -69,14 +77,12 @@ def edit(product_id):
         category = request.form.get('product_category')
         price = request.form.get('product_price')
         description = request.form.get('product_description')
-        owner = session['user_email']
 
         # deifine a product 
         p_edit = {
-            "owner":owner,
             "title":title, 
             "category":category, 
-            "price":price, 
+            "price":price,
             "description":description
         }
 
@@ -91,6 +97,10 @@ def edit(product_id):
 
 
     return render_template("edit_product.html", product = p)
+
+
+
+
 
 @user.route('/profile/delete/<product_id>')
 def delete(product_id):

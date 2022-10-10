@@ -54,6 +54,7 @@ def sign_up():
         email = request.form.get('email')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
+        print(type(password1), len(password1))
 
         # not bu mail
         if not email.endswith('@bu.edu'):
@@ -62,6 +63,10 @@ def sign_up():
         # already registered
         elif db.user.find_one({"email": email}):
             flash('Email in used', category='error')
+
+        # password too short
+        elif len(password1) < 6:
+            flash('Passowrd too short (need to be longer than 6 characters)', category='error')
         
         # confirm password invalid
         elif password1 != password2:
