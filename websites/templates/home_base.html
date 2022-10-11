@@ -1,3 +1,31 @@
+<style>
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    text-align: center;
+    justify-items: center;
+  }
+  
+  .card {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .img_wrapper {
+      width: 300px;
+      height: 200px;
+  }
+  
+  .item_pic {
+      width: 100%; /* or any custom size */
+      height: 100%; 
+      object-fit: cover;
+  }
+  
+  
+  </style>
+
 <!DOCTYPE html>
 
 
@@ -50,8 +78,26 @@
               <a class="nav-item nav-link" id="user" href="/profile" style="position: absolute; right: 700;top: 40px;">Profile</a>
               <a class="nav-item nav-link" id="about" href="/about" style="position: absolute; right: 600;top: 40px;">About</a>
               <a class="nav-item nav-link" id="log_out" href="/log_out" style="position: absolute; right: 500;top: 40px;">Logout</a>
+              
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter By</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
             
-            </div>
+                  <a class="dropdown-item" href="/">No Filter</a>
+                  <a class="dropdown-item" href="/filter_by/Furniture">Furniture</a>
+                  <a class="dropdown-item" href="/filter_by/Textbook">Textbook</a>
+                  <a class="dropdown-item" href="/filter_by/Electronic">Electronic</a>
+                  <a class="dropdown-item" href="/filter_by/Men Fashion">Men Fashion</a>
+                  <a class="dropdown-item" href="/filter_by/Women Fashion">Women Fashion</a>
+                  <a class="dropdown-item" href="/filter_by/Tiny Task">Tiny Task</a>
+                  <a class="dropdown-item" href="/filter_by/Other">Other</a>
+                  
+            
+               
+                </div>
+           
+           
+              </div>
           </div>
 
 
