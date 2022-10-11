@@ -30,11 +30,11 @@ def filter_by(category):
 
 @views.route("/product/<product_id>")
 def click_pic(product_id):
+
     # use object id to remove one product from db.product
     object_id = ObjectId(product_id)
     p = db.product.find_one({"_id":object_id})
-
-
+    
     return render_template('product_detail.html', product=p)
 
 
