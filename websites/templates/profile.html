@@ -26,16 +26,14 @@
 
         <ul class="list-group list-group-flush">
           <a style="text-align:center; font-weight: bold;">{{p['title']}}<a>
-          <a style="text-align:center;">Price: ${{p['price']}}</a>
-          <a style="text-align:center;">Category: {{p['category']}}</a>
+          <a style="text-align:center;">${{p['price']}}</a>
         </ul>
 
-        <br>
-        <br>
-      
-          <a href="{{url_for('user.edit', product_id=p._id)}}" class="btn btn-success">Edit</a>
-          <a href="{{url_for('user.delete', product_id=p._id)}}" class="btn btn-danger btn">Delete</a>
+
+        <a href="{{url_for('user.edit', product_id=p._id)}}" class="btn btn-success">Edit</a>
+        <a href="{{url_for('user.delete', product_id=p._id)}}" class="btn btn-danger btn">Delete</a>
       </div>
+
     {% endfor %}
     </div>
 

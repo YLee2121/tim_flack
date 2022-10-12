@@ -5,6 +5,7 @@ from . import db
 import json
 from bson.objectid import ObjectId
 from datetime import datetime
+from werkzeug.utils import secure_filename
 
 
 user = Blueprint("user", __name__)
@@ -39,7 +40,7 @@ def add_product():
         description = request.form.get('product_description')
         owner = session['user_email']
         post_date = datetime.today()
-
+        
 
         # define a product 
         p = {
@@ -111,3 +112,4 @@ def delete(product_id):
     flash('product delete!', category='success')
 
     return redirect(url_for('user.profile'))
+
