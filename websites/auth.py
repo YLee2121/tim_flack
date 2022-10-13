@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash, jsonify, session
-from . import db
+from . import db, EMAIL_SERVER
 from passlib.hash import pbkdf2_sha256
+
+
 
 auth = Blueprint("auth", __name__)
 
