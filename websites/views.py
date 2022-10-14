@@ -16,6 +16,7 @@ def home():
     all_product = db.product.find({})
     all_product = list(all_product) # turn into list can make html iteration easiler
 
+
     return render_template("home.html", all_product_online=all_product)
 
 @views.route("/about")

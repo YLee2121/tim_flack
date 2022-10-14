@@ -1,6 +1,8 @@
+from email.message import EmailMessage
 from flask import Blueprint, render_template, redirect, url_for, request, flash, session
-from . import db
+from . import db, mail_server
 from passlib.hash import pbkdf2_sha256
+from .email_module import email_cls
 
 
 
@@ -109,13 +111,19 @@ def reset_password():
         # email not registered yet
         if not db.user.find_one({"email": email}):
             flash('Email not signed up yet!', category='error')
-        
+            # do here
         # email signed up already
         else:
             session['reset_email'] = email
-            return redirect(url_for('email_.reset_password_code'))
-            
-
-
+            return render_template('reset_password_code.html')
     return render_template('reset_password.html')
 
+
+
+@auth.route('/send')
+def s():
+    a = 'kylelee@gapp.nthu.edu.tw'
+    code = email_cls.code_generator()
+    msg = email_cls.create_mail_with_code(a, code)
+    email_cls.send_mail(msg)
+    return 'send'

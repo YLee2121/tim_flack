@@ -39,7 +39,7 @@ def add_product():
     price = request.form.get('product_price')
     description = request.form.get('product_description')
     owner = session['user_email']
-    post_date = datetime.now()
+    post_date = str(datetime.now().date())
             
             
 
