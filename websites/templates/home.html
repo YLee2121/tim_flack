@@ -15,16 +15,17 @@
     <p>{{all_product_online}}</p> -->
     {% for p in all_product_online %}
 
-        <div class="card border-white mb-3" style="max-width: 18rem;">
+        <div class="card border-dark mb-3" style="max-width: 18rem;">
 
             <div class="img_wrapper">
-                <a href="{{url_for('views.click_pic', product_id=p._id)}}"><img src="../static/pic_for_html/test_image.png" class="item_pic"></a>
+                <a href="{{url_for('views.click_pic', product_id=p._id)}}"><img src="{{p.pic_path_for_html}}" class="item_pic"></a>
             </div>
 
             <ul class="list-group list-group-flush">
                 <h5 style="text-align:center;">{{p['title']}} ${{p['price']}}</h5>
                 <p style="text-align:center;">{{p['category']}}</p>
-                <p style="text-align:center;">Seller: {{p['owner']}}</p>
+                <p style="text-align:center;">{{p['owner']}}</p>
+                <p>{{p['post_date']}}</p>
             </ul>
 
         </div>
