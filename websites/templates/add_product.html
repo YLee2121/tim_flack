@@ -4,7 +4,7 @@
 
 {% block body%}
 
-<form method="POST" >
+<form method="POST" enctype="multipart/form-data">
 
     <div class="form-group">
       <label for="product_title">Product Title</label>
@@ -37,6 +37,9 @@
       <textarea class="form-control" id="product_description" name="product_description" placeholder="First Year Math Textbook. Tel:XXX-XXX-XXXX. Please feel free to contact me!" rows=5 required></textarea>
     </div>
 
+    <div>
+      <input type="file" name="product_pic">
+    </div>
 
     <br>
     <br>

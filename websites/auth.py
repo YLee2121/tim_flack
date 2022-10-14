@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash, jsonify, session
-from . import db, EMAIL_SERVER
+from flask import Blueprint, render_template, redirect, url_for, request, flash, session
+from . import db
 from passlib.hash import pbkdf2_sha256
 
 
@@ -11,9 +11,12 @@ auth = Blueprint("auth", __name__)
 def log_in():
 
     if request.method == "POST":
+        
+        # data from the html form
         email = request.form.get('email')
         password = request.form.get('password')
 
+        # db search
         u = db.user.find_one({"email": email})
 
         # email error
@@ -31,6 +34,7 @@ def log_in():
             flash('Log in successfully', category='success')
             return redirect(url_for('views.home'))
 
+    # if already logged in 
     if "logged" in session:
         return redirect(url_for('views.home'))
 
@@ -41,6 +45,8 @@ def log_in():
 
 @auth.route('/log_out')
 def log_out():
+
+    # if logged in
     if "logged" in session:
         session.clear()
         flash('Log out successful', category='success')
@@ -93,6 +99,23 @@ def sign_up():
     return render_template("sign_up.html")
 
 
-@auth.route('/reset_password')
+@auth.route('/reset_password', methods=['GET', 'POST'])
 def reset_password():
+
+    if request.method == "POST":
+        
+        email = request.form.get('email')
+
+        # email not registered yet
+        if not db.user.find_one({"email": email}):
+            flash('Email not signed up yet!', category='error')
+        
+        # email signed up already
+        else:
+            session['reset_email'] = email
+            return redirect(url_for('email_.reset_password_code'))
+            
+
+
     return render_template('reset_password.html')
+

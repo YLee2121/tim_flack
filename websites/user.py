@@ -1,11 +1,10 @@
 
-from unicodedata import category
 from flask import Blueprint, render_template, redirect, url_for, session, request, flash, jsonify
-from . import db
-import json
+from . import db, UPLOAD_FOLDER
 from bson.objectid import ObjectId
 from datetime import datetime
 from werkzeug.utils import secure_filename
+import os
 
 
 user = Blueprint("user", __name__)
@@ -41,6 +40,23 @@ def add_product():
         owner = session['user_email']
         post_date = datetime.today()
         
+        
+        
+        # save pic
+        pic_name = secure_filename(request.files['product_pic'].filename)
+        product_pic = request.files['product_pic']
+
+        # check dir
+        personal_dir = UPLOAD_FOLDER + session['user_email'] + '/'
+        if not os.path.exists(personal_dir):
+            os.mkdir(personal_dir)
+        path = personal_dir + pic_name 
+
+        # save pic 
+        product_pic.save(path)
+
+
+
 
         # define a product 
         p = {

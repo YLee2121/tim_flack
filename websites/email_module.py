@@ -1,5 +1,6 @@
 import smtplib
 from email.mime.text import MIMEText
+from random import randint
 
 
 class Email_server:
@@ -34,8 +35,21 @@ BU MarketPlare Admin'''.format(receiver_addr, code)
 
         return msg.as_string()
 
-    def send_email(self, sender_id, receiver_addr, message):
-        self.server.sendmail(sender_id, receiver_addr, message)
+    def send_email(self, receiver_addr, message):
+        self.server.sendmail(self.email_user, receiver_addr, message)
+        
+
+    @staticmethod
+    def code_generator():
+        return randint(111111, 999999)
         
 
 
+
+if __name__ == '__main__': 
+    tom = 'kyleleey@bu.edu'
+    tom1 = 'yi.lee.77890@gmail.com'
+    tom3 = 'kylelee@gapp.nthu.edu.tw'
+    s = Email_server()
+    msg = s.create_mail_with_code(tom1, 33000)
+    s.send_email(tom1, msg)
