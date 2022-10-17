@@ -44,7 +44,8 @@ def add_product():
             
 
     ##### pic processing
-    pic_name = secure_filename(request.files['product_pic'].filename) # SAME FILENAME, NEED TO HASH A NEW NAME
+
+    pic_name = str(datetime.now()) + secure_filename(request.files['product_pic'].filename) # add a datetime.now(), to make the name unique
     product_pic = request.files['product_pic']
 
     # check extension 
@@ -119,11 +120,8 @@ def edit(product_id):
 
         # redirect to profile
         flash('Product Edited!', category='success')
-
         return redirect(url_for('user.profile'))
-
-
-
+        
     return render_template("edit_product.html", product = p)
 
 
