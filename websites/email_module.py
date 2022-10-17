@@ -1,14 +1,14 @@
 from flask_mail import Message
-from . import mail_server, db
+from . import mail_server, db, app
 from random import randint
 
 
 class email_cls:
     """
         define the email server
-        gmail: bumarketplace488@gmail.com
-        password: Admin2022@@
-        App Password: grihtpchplddgqkv
+        gmail: 
+        password: 
+        App Password: 
      """
 
     @staticmethod
@@ -40,7 +40,7 @@ class email_cls:
 
     @staticmethod
     def create_mail_with_code(receiver, code):
-        msg = Message('BU MarketPlace Admin - noreply', sender = 'bumarketplace488@gmail.com', recipients = [receiver])
+        msg = Message('BU MarketPlace Admin - noreply', sender = app.config['MAIL_USERNAME'], recipients = [receiver])
         msg.body = '''Hi {}, 
 
 Your one time authendication code is {}

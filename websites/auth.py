@@ -63,7 +63,6 @@ def sign_up():
         email = request.form.get('email')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
-        print(type(password1), len(password1))
 
         # not bu mail
         if not email.endswith('@bu.edu'):
@@ -83,21 +82,40 @@ def sign_up():
         
         # sign up success
         else:
-            # create user object
-            u = {
-                "email":email, 
-                "password":password1
-                }
             # encrypt password
-            u['password'] = pbkdf2_sha256.encrypt(u['password'])
-
-            # insert into db 
-            db.user.insert_one(u)
-            flash('Account created!', category='success')
-
-            return redirect(url_for('auth.log_in'))
+            password1 = pbkdf2_sha256.encrypt(password1)
+            
+            # send verif code
+            session['sign_up_email'] = email
+            session['sign_up_password'] = password1
+            return redirect(url_for('auth.send_code_sign_up'))
             
     return render_template("sign_up.html")
+
+@auth.route('sign_up_code', methods=['GET', 'POST'])
+def sign_up_code():
+
+    if request.method == 'POST':
+
+        verif_code = request.form.get('code')
+        db_c = db.email_to_code.find_one({'email':session['reset_email']})
+        db_code = db_c['code']
+
+        if str(verif_code) != str(db_code):
+            
+            flash('Verification code incorrect', category='error')
+
+        else:
+            u = {
+                "email":session['sign_up_email'],
+                "password":session['sign_up_password']
+            }
+            db.user.insert_one(u)
+            flash('Account created!', category='success')
+            return redirect( url_for('auth.log_in'))
+
+    return render_template('sign_up_code.html')
+
 
 
 
@@ -115,7 +133,10 @@ def reset_password():
         # email signed up already
         else:
             session['reset_email'] = email
-            return redirect( url_for('auth.send_code') )
+            print(session['reset_email'])
+            return redirect( url_for('auth.send_code_reset') )
+
+    
     return render_template('reset_password.html')
 
 
@@ -163,12 +184,20 @@ def reset_password_code():
 
 
 
+@auth.route('/send_code_sign_up')
+def send_code_sign_up():
+    # create code, send code, update db (email_to_code)
+    sign_up_email = session['sign_up_email']
+    email_cls.send_mail(sign_up_email)
+    flash('Verification code sent!', category='success')
+    return redirect( url_for('auth.sign_up_code'))
 
-@auth.route('/send_code')
-def send_code():
+@auth.route('/send_code_reset')
+def send_code_reset():
     # create code, send code, update db (email_to_code)
     reset_email = session['reset_email']
     email_cls.send_mail(reset_email)
     flash('Verification code sent!', category='success')
     return redirect( url_for('auth.reset_password_code'))
+   
 

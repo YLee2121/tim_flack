@@ -1,0 +1,30 @@
+{% extends "log_in_base.html" %}
+
+{% block title %}RESET{% endblock %}
+
+{% block body%}
+
+<form method="POST">
+    <h1>Verification Code</h1>
+    <p>!!!Please check the SPAM box in your bu email. It might take some time!! BE PATIENT!!</p>
+
+    <div class="form-group">
+
+        <label for="email">Verification Code</label>
+        <input type="number" 
+                class="form-control" 
+                name="code" 
+                placeholder="Enter Verification Code">
+
+        
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Verify</button>
+    <a class="nav-item nav-link" id="resend_the_code" href="{{url_for('auth.send_code_sign_up')}}">Resend the code</a>
+ 
+
+
+
+</form>
+
+{% endblock%}
