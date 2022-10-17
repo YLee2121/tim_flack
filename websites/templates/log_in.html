@@ -4,35 +4,52 @@
 
 {% block body%}
 
-<form method="POST">
-    <h1>Log In</h1>
+<style>
+p.normal {
+    font-weight: bold;
+    position: relative;
+    left: 600px;
+  }
+  
 
+</style>
+
+<form method="POST">
+    <br>
+    <br>
+    <h1 style = "text-align: center; font-weight: bold;">Log In</h1>
+    <br>
     <div class="form-group">
 
-        <label for="email">BU Email</label>
-        <input type="email" 
+        <p class="normal">BU Email</p>
+        <input type="email"  
                 class="form-control" 
                 id="email" 
                 name="email" 
-                placeholder="Enter BU Email">
+                placeholder="Enter BU Email"
+                style="width: 300px;position: relative; left: 600px;">
         <br>
 
-        <label for="password">Password</label>
-        <input type="password" 
+        <p class="normal">Password</p>
+        <input type="Password"  
                 class="form-control" 
-                id="password" 
-                name="password" 
-                placeholder="Enter Password">
+                id="Password" 
+                name="Password" 
+                placeholder="Enter Password"
+                style="width: 300px;position: relative; left: 600px;">
         <br>
 
         
 
     </div>
 
-
-    <button type="submit" class="btn btn-primary">Log In</button>
-    <a class="nav-item nav-link" id="sign_up" href="/sign_up">Sign Up</a>
-    <a class="nav-item nav-link" id="reset_password" href="/reset_password">Reset Password</a>
+    
+        <input style="position: relative; left: 600px;" type="checkbox" value="lsRememberMe" id="rememberMe"> <label style="position: relative; left: 605px;" for="rememberMe">Remember me</label> 
+        <a style="position: relative; left: 765px;color: darkgrey;" class="nav-item nav-link" id="reset_password" href="/reset_password">Reset Password</a>
+     
+    
+    <button style="width: 300px;position: relative; left: 600px; background-color: red;" type="submit" value="Login" class="btn btn-primary">Log In</button>
+    <a style="width: 300px;position: relative; left: 600px; color: darkgrey;" class="nav-item nav-link" id="sign_up" href="/sign_up">Don't have an account? Sign up now!</a>
  
 
 
