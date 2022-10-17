@@ -3,11 +3,21 @@
 
 {% block body%}
 
-<p>{{product.title}}</p>
-<p>{{product.price}}</p>
-<p>{{product.post_date}}</p>
-<p>{{product.description}}</p>
-<img src="{{product.pic_path_for_html}}" class="item_pic">
 
+
+
+
+<div class="card" style="width: 30rem;">
+
+    <img class="card-img-top" src="{{product.pic_path_for_html}}" alt="Card image cap" >
+
+    <div class="card-body">
+        <h5 class="card-title">{{product.title}} ${{product.price}} </h5>
+
+        <p>{{product.owner}} | {{product.category}} | {{product.post_date}}</p>
+        <p class="card-text">{{product.description}}</p>
+    </div>
+
+  </div>
 
 {% endblock%}

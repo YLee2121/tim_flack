@@ -98,7 +98,7 @@ def sign_up_code():
     if request.method == 'POST':
 
         verif_code = request.form.get('code')
-        db_c = db.email_to_code.find_one({'email':session['reset_email']})
+        db_c = db.email_to_code.find_one({'email':session['sign_up_email']})
         db_code = db_c['code']
 
         if str(verif_code) != str(db_code):

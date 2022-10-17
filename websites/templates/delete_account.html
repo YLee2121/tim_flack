@@ -1,0 +1,32 @@
+{% extends "profile_base.html" %}
+
+{% block title %}PROFILE{% endblock %}
+
+{% block body%}
+
+<h1>DELETE ACCOUNT</h1>
+
+<div class="card" style="width: 25rem;" >
+    <img class="card-img-top" src="/static/pic_for_html/delete_account_page_are_you_sure.jpg" alt="Card image cap">
+    <div class="card-body">
+
+
+        <h5 class="card-title">ARE YOU REALLY SURE??</h5>
+        <p class="card-text">Deletion is a scary concept.  If you own a blog, you've probably spent months or even years crafting content, gaining followers, and building up your online reputation. You've made a digital footprint in the form of created assets and conversations, all of which took time and care to make.
+
+        Deleting a blog account is serious business. You're not just deleting a username and password combination—you're deleting your creative content, your unique voice, your history in the community, and the digital space that you occupied.</p>
+    
+        <form method="POST">
+            <div class="form-group">
+                <input type="text" class="form-control" id="delete_msg" name="delete_msg" placeholder="Type 'DELETE_PLEASE' to delete the account" required>
+            </div>
+
+            <button type="submit" class="btn btn-danger" >DELETE!!!</button>
+        </form>
+
+
+    </div>
+</div>
+
+
+{% endblock%}

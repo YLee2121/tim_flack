@@ -1,10 +1,14 @@
 
+
+from crypt import methods
 from flask import Blueprint, render_template, redirect, url_for, session, request, flash, jsonify
+
 from . import db, APP_TO_PIC_PATH, SRC_TO_PIC_PATH, allowed_file
 from bson.objectid import ObjectId
 from datetime import datetime
 from werkzeug.utils import secure_filename
 import os
+import shutil
 
 
 user = Blueprint("user", __name__)
@@ -148,3 +152,45 @@ def delete(product_id):
 
     return redirect(url_for('user.profile'))
 
+
+
+@user.route('/profile/delete_account', methods=['GET', 'POST'])
+def delete_account():
+
+    if request.method == "POST": 
+        user_email = session['user_email']
+        text = request.form.get('delete_msg')
+        if text != 'DELETE_PLEASE':
+            flash("Type 'DELETE_PLEASE' if you need to delete the account!", category='error')
+        else:
+            
+            # delete pic folder
+            path = APP_TO_PIC_PATH + user_email
+            if os.path.exists(path):
+                shutil.rmtree(path)
+    
+            
+            # delete product db
+            query_filter = {
+                'owner':user_email
+                }
+            db.product.delete_many(query_filter) 
+
+            # delete user db 
+            query_filter = {
+                'email':user_email
+            }
+            db.user.delete_one(query_filter)
+
+            # delete email_to_code
+            query_filter = {
+                'email':user_email
+            }
+            db.email_to_code.delete_one(query_filter)
+            
+
+            # log out 
+            flash("Account delete successfully!", category='success')
+            return redirect(url_for('auth.log_out'))
+
+    return render_template('delete_account.html')
