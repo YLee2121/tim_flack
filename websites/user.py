@@ -44,7 +44,7 @@ def add_product():
             
 
     ##### pic processing
-    pic_name = secure_filename(request.files['product_pic'].filename)
+    pic_name = secure_filename(request.files['product_pic'].filename) # SAME FILENAME, NEED TO HASH A NEW NAME
     product_pic = request.files['product_pic']
 
     # check extension 

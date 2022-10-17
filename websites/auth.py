@@ -12,7 +12,7 @@ auth = Blueprint("auth", __name__)
 @auth.route('/log_in', methods=["POST", "GET"])
 def log_in():
 
-    if request.method == "POST":
+    if request.method == "POST":  
         
         # data from the html form
         email = request.form.get('email')
