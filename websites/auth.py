@@ -60,17 +60,18 @@ def log_out():
 @auth.route('/sign_up', methods=["POST", "GET"])
 def sign_up():
     if request.method == "POST":
+
         email = request.form.get('email')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
-
-        # not bu mail
-        if not email.endswith('@bu.edu'):
-            flash('Email must end with @bu.edu', category='error')
         
         # already registered
-        elif db.user.find_one({"email": email}):
+        if db.user.find_one({"email": email}):
             flash('Email in used', category='error')
+
+        #  # not bu mail
+        # elif not email.endswith('@bu.edu'):
+        #     flash('Email must end with @bu.edu', category='error')
 
         # password too short
         elif len(password1) < 6:
@@ -82,6 +83,7 @@ def sign_up():
         
         # sign up success
         else:
+
             # encrypt password
             password1 = pbkdf2_sha256.encrypt(password1)
             
@@ -200,4 +202,5 @@ def send_code_reset():
     flash('Verification code sent!', category='success')
     return redirect( url_for('auth.reset_password_code'))
    
+
 

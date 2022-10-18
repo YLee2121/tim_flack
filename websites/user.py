@@ -19,9 +19,13 @@ def profile():
     if "logged" not in session:
         return redirect(url_for('auth.log_in'))
 
-    all_product_owned = db.product.find({"owner":session['user_email']})
+    query_filter = {
+        "owner":session['user_email']
+    }
     
-    
+    all_product_owned = db.product.find(query_filter).sort('timestamp', -1) # from new to old
+    all_product_owned = list(all_product_owned)
+
     return render_template('profile.html', email=session['user_email'], all_product_owned = all_product_owned)
 
 
@@ -44,8 +48,7 @@ def add_product():
     description = request.form.get('product_description')
     owner = session['user_email']
     post_date = str(datetime.now().date())
-            
-            
+    timestamp = datetime.now()
 
     ##### pic processing
 
@@ -82,6 +85,7 @@ def add_product():
         "price":price, 
         "description":description,
         "post_date": post_date,
+        "timestamp":timestamp,
         "pic_path_for_html": path_for_html,  # save in user.py viewpoint
         "pic_path_for_app": save_path
     }
@@ -194,3 +198,27 @@ def delete_account():
             return redirect(url_for('auth.log_out'))
 
     return render_template('delete_account.html')
+
+
+@user.route('/test_add')
+def test_add():
+    
+    title = 'test'
+    category = 'None'
+    price = '123123'
+    description = 'ajwoiefjoiajowejfioawe'
+    owner = 'test@email.com'
+    post_date = str(datetime.now().date())
+
+    p = {
+        "owner":owner,
+        "title":title, 
+        "category":category, 
+        "price":price, 
+        "description":description,
+        "post_date": post_date,
+    }
+
+    db.product.insert_one(p)
+
+    return "done insert "

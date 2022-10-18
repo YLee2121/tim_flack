@@ -13,7 +13,8 @@ def home():
     if "logged" not in session:
         return redirect(url_for('auth.log_in'))
 
-    all_product = db.product.find({})
+
+    all_product = db.product.find({}).sort('timestamp', -1) # from new to old
     all_product = list(all_product) # turn into list can make html iteration easiler
 
 
@@ -25,7 +26,7 @@ def about():
 
 @views.route("/filter_by/<category>")
 def filter_by(category):
-    all_product = db.product.find({'category':category})
+    all_product = db.product.find({'category':category}).sort('timestamp', -1) # from new to old
     all_product = list(all_product) # into list can make html iteration easiler
     return render_template("home.html", all_product_online=all_product)
 
