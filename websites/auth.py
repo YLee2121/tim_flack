@@ -135,7 +135,6 @@ def reset_password():
         # email signed up already
         else:
             session['reset_email'] = email
-            print(session['reset_email'])
             return redirect( url_for('auth.send_code_reset') )
 
     
