@@ -14,7 +14,7 @@
     <div class="card-body">
         <h5 class="card-title">{{product.title}} ${{product.price}} </h5>
 
-        <p>{{product.owner}} | {{product.category}} | {{product.post_date}}</p>
+        <p><a href="mailto: {{product['owner']}}">{{product['owner']}}</a> | {{product.category}} | {{product.post_date}}</p>
         <p class="card-text">{{product.description}}</p>
     </div>
 
